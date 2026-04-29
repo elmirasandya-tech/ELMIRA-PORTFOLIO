@@ -1,0 +1,100 @@
+{
+  "entities": {
+    "Project": {
+      "title": "Project",
+      "description": "A portfolio project item",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "category": { "type": "string" },
+        "title": { "type": "string" },
+        "description": { "type": "string" },
+        "image": { "type": "string" },
+        "gallery": { "type": "array", "items": { "type": "string" } },
+        "tags": { "type": "array", "items": { "type": "string" } },
+        "link": { "type": "string" },
+        "fullDescription": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["id", "category", "title", "description", "image"]
+    },
+    "Profile": {
+      "title": "Profile",
+      "description": "User profile and contact information",
+      "type": "object",
+      "properties": {
+        "firstName": { "type": "string" },
+        "lastName": { "type": "string" },
+        "availabilityStatus": { "type": "string" },
+        "bio": { "type": "string" },
+        "fullBio": { "type": "string" },
+        "expYears": { "type": "string" },
+        "projectsCount": { "type": "string" },
+        "location": { "type": "string" },
+        "phone": { "type": "string" },
+        "instagram": { "type": "string" },
+        "email": { "type": "string" },
+        "avatar": { "type": "string" },
+        "qrCode": { "type": "string" },
+        "skills": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "WorkExperience": {
+      "title": "Work Experience",
+      "description": "Professional experience entry",
+      "type": "object",
+      "properties": {
+        "role": { "type": "string" },
+        "company": { "type": "string" },
+        "period": { "type": "string" },
+        "description": { "type": "string" },
+        "order": { "type": "number" }
+      }
+    },
+    "Education": {
+      "title": "Education",
+      "description": "Education background entry",
+      "type": "object",
+      "properties": {
+        "degree": { "type": "string" },
+        "school": { "type": "string" },
+        "period": { "type": "string" },
+        "order": { "type": "number" }
+      }
+    },
+    "GalleryImage": {
+      "title": "Gallery Image",
+      "description": "An image item in a project gallery",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "url": { "type": "string" },
+        "order": { "type": "number" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["id", "url"]
+    }
+  },
+  "firestore": {
+    "portfolios/main/profile/data": {
+      "schema": "Profile",
+      "description": "Main profile data"
+    },
+    "portfolios/main/projects/{projectId}": {
+      "schema": "Project",
+      "description": "Portfolio projects collection"
+    },
+    "portfolios/main/projects/{projectId}/gallery/{imageId}": {
+      "schema": "GalleryImage",
+      "description": "Project gallery images"
+    },
+    "portfolios/main/experience/{expId}": {
+      "schema": "WorkExperience",
+      "description": "Work history collection"
+    },
+    "portfolios/main/education/{eduId}": {
+      "schema": "Education",
+      "description": "Education history collection"
+    }
+  }
+}

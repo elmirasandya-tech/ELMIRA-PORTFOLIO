@@ -1,0 +1,58 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Helper functions
+    function isSignedIn() {
+      return request.auth != null;
+    }
+    
+    function isOwner(userId) {
+      return isSignedIn() && request.auth.uid == userId;
+    }
+
+    function isVerifiedEmail(email) {
+      return isSignedIn() && request.auth.token.email == email && request.auth.token.email_verified == true;
+    }
+
+    // Default deny
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // Portfolio structure
+    match /portfolios/main {
+      function canEdit() {
+        return isSignedIn() && request.auth.token.email == "elmirasandya@gmail.com" && request.auth.token.email_verified == true;
+      }
+
+      // Profile
+      match /profile/data {
+        allow read: if true;
+        allow write: if canEdit();
+      }
+
+      // Projects
+      match /projects/{projectId} {
+        allow read: if true;
+        allow write: if canEdit();
+
+        match /gallery/{imageId} {
+          allow read: if true;
+          allow write: if canEdit();
+        }
+      }
+
+      // Experience
+      match /experience/{expId} {
+        allow read: if true;
+        allow write: if canEdit();
+      }
+
+      // Education
+      match /education/{eduId} {
+        allow read: if true;
+        allow write: if canEdit();
+      }
+    }
+  }
+}
