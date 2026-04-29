@@ -1353,25 +1353,25 @@ export default function App() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-8 bg-black/95 backdrop-blur-xl"
+            className="fixed inset-0 z-[100] flex items-start justify-center p-4 md:p-12 bg-black/95 backdrop-blur-2xl overflow-y-auto"
             onClick={() => setSelectedProject(null)}
           >
             <motion.div 
-              initial={{ scale: 0.9, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.9, opacity: 0 }}
-              className="max-w-7xl w-full max-h-screen flex flex-col items-center gap-6 relative"
+              initial={{ scale: 0.9, opacity: 0, y: 20 }}
+              animate={{ scale: 1, opacity: 1, y: 0 }}
+              exit={{ scale: 0.9, opacity: 0, y: 20 }}
+              className="max-w-7xl w-full flex flex-col items-center gap-6 relative my-auto"
               onClick={(e) => e.stopPropagation()}
             >
               <button 
                 onClick={() => setSelectedProject(null)} 
-                className="absolute top-0 right-0 md:-top-16 md:-right-16 z-[110] p-4 text-white/50 hover:text-white bg-white/5 md:bg-transparent rounded-full transition-all hover:scale-110 active:scale-95"
+                className="absolute -top-4 -right-4 md:-top-8 md:-right-8 z-[110] w-12 h-12 flex items-center justify-center text-white bg-orange-500 rounded-full transition-all hover:scale-110 active:scale-95 shadow-2xl"
                 title="Close (Esc)"
               >
-                <X className="w-10 h-10" />
+                <X className="w-6 h-6 stroke-[3px]" />
               </button>
               
-              <div className="w-full flex flex-col md:flex-row gap-12 items-start overflow-y-auto pr-2 custom-scrollbar">
+              <div className="w-full flex flex-col md:flex-row gap-12 items-start bg-zinc-950/50 p-6 md:p-10 rounded-[40px] border border-white/5 backdrop-blur-md">
                 <div className="w-full md:w-2/3 flex flex-col gap-6">
                   {/* Main Image View */}
                   <div className="w-full flex items-center justify-center bg-zinc-900/50 rounded-3xl overflow-hidden min-h-[300px] border border-zinc-800/50 group/main relative">
@@ -1472,7 +1472,7 @@ export default function App() {
                   </div>
                 </div>
 
-                <div className="w-full md:w-1/3 flex flex-col sticky top-0">
+                <div className="w-full md:w-1/3 flex flex-col md:sticky md:top-0">
                   <div className={`text-[10px] font-black uppercase tracking-[0.3em] mb-4 ${theme === 'elegant' ? 'text-zinc-500' : 'text-orange-500'}`}>
                     Project Preview
                   </div>
